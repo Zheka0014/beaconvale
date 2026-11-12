@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111e22">
+<title>Beaconvale — fantasy RPG for Windows</title>
+<meta name="description" content="Beaconvale is a single-player fantasy RPG for Windows. Relight the beacon of a quiet valley, explore a mine where time shifts and cross the pass into the Ashen Highlands.">
+<link rel="icon" href="img/icon-48.png" type="image/png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<meta property="og:title" content="Beaconvale">
+<meta property="og:description" content="A single-player fantasy RPG for Windows.">
+<meta property="og:image" content="img/keyart-1600x900.jpg">
+<script>
+/* Russian for Russian-speaking systems, English for everyone else; a click on the switch is remembered. */
+(function(){var l=null;try{l=localStorage.getItem('beaconvale-site-lang')}catch(e){}if(l!=='ru'&&l!=='en')l=/^(ru|be|kk)\b/i.test(navigator.language||'')?'ru':'en';document.documentElement.lang=l})();
+</script>
+<style>
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond.ttf') format('truetype');font-weight:300 700;font-display:swap}
+@font-face{font-family:'Golos Text';src:url('fonts/GolosText.ttf') format('truetype');font-weight:400 900;font-display:swap}
+:root{color-scheme:dark;--bg:#0f191d;--panel:#16252a;--text:#ece8dc;--muted:#a9b5b2;--gold:#e5bb73;--gold2:#c28f45;--line:#ffffff1f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 'Golos Text',system-ui,sans-serif}
+html[lang=ru] [data-l=en],html[lang=en] [data-l=ru]{display:none!important}
+a{color:var(--gold)}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:flex-end;gap:8px;padding:16px;z-index:2}
+.top button{font:inherit;font-size:13px;color:var(--text);background:#0f191dcc;border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+.top button[aria-pressed=true]{border-color:var(--gold);color:var(--gold)}
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;background:#0b1417 url('img/keyart-1600x900.jpg') center/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b1417aa 0%,#0b141720 35%,#0b1417e8 82%,var(--bg) 100%)}
+.hero-inner{position:relative;width:100%;max-width:1040px;margin:0 auto;padding:0 16px 56px}
+.logo{display:flex;align-items:center;gap:16px}
+.logo img{width:64px;height:64px;border-radius:14px}
+h1{margin:0;font:700 clamp(44px,9vw,92px)/1 'Cormorant Garamond',Georgia,serif;letter-spacing:.1em;background:linear-gradient(180deg,#fff2cf,#f0cf8a 50%,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{font:600 clamp(20px,3vw,28px)/1.3 'Cormorant Garamond',Georgia,serif;color:#f3e6c8;margin:14px 0 6px;max-width:720px}
+.sub{color:var(--muted);max-width:640px;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;border-radius:8px;padding:13px 22px}
+.btn.primary{background:linear-gradient(180deg,#f3d48e,#c9964d);color:#1a1408;box-shadow:0 8px 30px #e5bb7333}
+.btn.ghost{border:1px solid var(--line);color:var(--text)}
+.note{color:var(--muted);font-size:14px}
+main{max-width:1040px;margin:0 auto;padding:24px 16px 64px}
+h2{font:700 30px/1.2 'Cormorant Garamond',Georgia,serif;color:var(--gold);margin:44px 0 14px}
+.story{font-size:18px;max-width:760px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:0;list-style:none}
+.features li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.features b{display:block;color:#f3e6c8;margin-bottom:4px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.shots img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
+.req{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px}
+.req ul{margin:0;padding-left:20px}
+footer{border-top:1px solid var(--line);max-width:1040px;margin:0 auto;padding:22px 16px 40px;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--muted)}
+@media(max-width:560px){.logo{gap:10px}.logo img{width:40px;height:40px;border-radius:10px}h1{font-size:34px;letter-spacing:.06em}.shots{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top" role="group" aria-label="Language / Язык">
+ <button type="button" data-set="ru">Русский</button><button type="button" data-set="en">English</button>
+</div>
+
+<header class="hero">
+ <div class="hero-inner">
+  <div class="logo"><img src="img/icon-192.png" alt=""><h1>BEACONVALE</h1></div>
+  <p class="tagline" data-l="en">The beacon above a quiet valley has gone dark, and the shadows have names.</p>
+  <p class="tagline" data-l="ru">Маяк над тихой долиной погас, и у теней появились имена.</p>
+  <p class="sub" data-l="en">A single-player fantasy RPG for Windows. Three classes, a story in four chapters, two endings, day and night, gamepad support. English and Russian.</p>
+  <p class="sub" data-l="ru">Одиночная фэнтезийная RPG для Windows. Три класса, история в четырёх главах, две концовки, день и ночь, поддержка геймпада. Русский и английский языки.</p>
+  <div class="cta">
+   <a class="btn primary" href="https://apps.microsoft.com/detail/9NC5QZR3H31B"><span data-l="en">Get it on Microsoft Store</span><span data-l="ru">Купить в Microsoft Store</span></a>
+   <a class="btn ghost" href="#about"><span data-l="en">About the game</span><span data-l="ru">Об игре</span></a>
+  </div>
+ </div>
+</header>
+
+<main>
+ <section id="about">
+  <h2 data-l="en">About the game</h2><h2 data-l="ru">Об игре</h2>
+  <p class="story" data-l="en">For as long as anyone in the valley can remember, a beacon burned above the ruins and kept the shadows away. Now it is dark, the forest path is full of things that used to be people, and the keeper by the campfire needs someone who will not turn back. Choose a warrior, a mage or a ranger, recover the memories the valley has lost, face the prisoner of the seal — and then cross the pass into the Ashen Highlands.</p>
+  <p class="story" data-l="ru">Сколько помнят жители долины, над руинами горел маяк и держал тени на расстоянии. Теперь он погас, на лесной тропе бродят те, кто когда-то были людьми, а хранительнице у костра нужен тот, кто не повернёт назад. Выберите воина, мага или следопыта, верните воспоминания, которые потеряла долина, сразитесь с пленником печати — а затем пройдите перевал в Пепельное нагорье.</p>
+
+  <ul class="features" data-l="en">
+   <li><b>Three classes</b>Warrior, mage and ranger, each with its own attacks, area skill, class defence and fury strike.</li>
+   <li><b>Four chapters, two endings</b>Memories to recover, side quests and a companion who fights beside you.</li>
+   <li><b>The Mine of Lost Names</b>One mine in two timelines: what you repair in the past opens the way in the present.</li>
+   <li><b>The Ashen Highlands</b>Light three signal fires and face Hald, the Warden of Ash, in a three-phase battle.</li>
+   <li><b>Living world</b>Day and night, rain and mist. At night the shades grow stronger and the loot gets richer.</li>
+   <li><b>Plenty to find</b>Gear and upgrades, hidden caches, 17 achievements, three difficulty levels and New Game+.</li>
+  </ul>
+  <ul class="features" data-l="ru">
+   <li><b>Три класса</b>Воин, маг и следопыт: свои атаки, умение по области, защита класса и удар ярости.</li>
+   <li><b>Четыре главы, две концовки</b>Воспоминания, дополнительные задания и спутница, которая сражается рядом.</li>
+   <li><b>Шахта потерянных имён</b>Одна шахта в двух временах: то, что вы почините в прошлом, откроет путь в настоящем.</li>
+   <li><b>Пепельное нагорье</b>Зажгите три сигнальных огня и победите Хальда, Пепельного стража, в бою из трёх фаз.</li>
+   <li><b>Живой мир</b>День и ночь, дождь и туман. Ночью тени сильнее, а добыча богаче.</li>
+   <li><b>Есть что искать</b>Снаряжение и улучшения, тайники, 17 достижений, три уровня сложности и Новая игра+.</li>
+  </ul>
+ </section>
+
+ <section>
+  <h2 data-l="en">Screenshots</h2><h2 data-l="ru">Скриншоты</h2>
+  <div class="shots" data-l="en">
+   <img src="img/en-01-warden-of-ash.jpg" alt="Battle with Hald, the Warden of Ash" loading="lazy" width="1280" height="720">
+   <img src="img/en-02-ashen-highlands.jpg" alt="Ash hounds at a signal fire" loading="lazy" width="1280" height="720">
+   <img src="img/en-03-night-in-the-valley.jpg" alt="Night by the campfire" loading="lazy" width="1280" height="720">
+   <img src="img/en-04-story-by-the-fire.jpg" alt="A conversation with Elira" loading="lazy" width="1280" height="720">
+   <img src="img/en-05-mine-of-lost-names.jpg" alt="The Mine of Lost Names" loading="lazy" width="1280" height="720">
+  </div>
+  <div class="shots" data-l="ru">
+   <img src="img/ru-01-warden-of-ash.jpg" alt="Бой с Хальдом, Пепельным стражем" loading="lazy" width="1280" height="720">
+   <img src="img/ru-02-ashen-highlands.jpg" alt="Пепельные гончие у сигнального огня" loading="lazy" width="1280" height="720">
+   <img src="img/ru-03-night-in-the-valley.jpg" alt="Ночь у костра" loading="lazy" width="1280" height="720">
+   <img src="img/ru-04-story-by-the-fire.jpg" alt="Разговор с Элирой" loading="lazy" width="1280" height="720">
+   <img src="img/ru-05-mine-of-lost-names.jpg" alt="Шахта потерянных имён" loading="lazy" width="1280" height="720">
+  </div>
+ </section>
+
+ <section>
+  <h2 data-l="en">System requirements</h2><h2 data-l="ru">Системные требования</h2>
+  <div class="req" data-l="en"><ul>
+   <li>Windows 10 (version 1809 or later) or Windows 11, 64-bit</li>
+   <li>4 GB RAM, 600 MB of disk space</li>
+   <li>Graphics with DirectX 11 support (Intel HD Graphics 620 or better)</li>
+   <li>Keyboard and mouse or a gamepad</li>
+  </ul></div>
+  <div class="req" data-l="ru"><ul>
+   <li>Windows 10 (версия 1809 и новее) или Windows 11, 64-bit</li>
+   <li>4 ГБ ОЗУ, 600 МБ на диске</li>
+   <li>Видеокарта с поддержкой DirectX 11 (Intel HD Graphics 620 или лучше)</li>
+   <li>Клавиатура и мышь или геймпад</li>
+  </ul></div>
+ </section>
+</main>
+
+<footer>
+ <span>© 2026 LooT RooM</span>
+ <a href="privacy.html"><span data-l="en">Privacy policy</span><span data-l="ru">Политика конфиденциальности</span></a>
+ <a href="mailto:lootroomgame@gmail.com"><span data-l="en">Support</span><span data-l="ru">Поддержка</span>: lootroomgame@gmail.com</a>
+</footer>
+
+<script>
+(function(){
+ function set(l){document.documentElement.lang=l;document.querySelectorAll('[data-set]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===l))});try{localStorage.setItem('beaconvale-site-lang',l)}catch(e){}document.title=l==='ru'?'Beaconvale — фэнтезийная RPG для Windows':'Beaconvale — fantasy RPG for Windows'}
+ document.querySelectorAll('[data-set]').forEach(function(b){b.addEventListener('click',function(){set(b.dataset.set)})});
+ set(document.documentElement.lang);
+ // The game used to be installable from this site. Remove the old offline copy from browsers that installed it.
+ if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){if(r.scope.indexOf('/beaconvale/')>-1)r.unregister()})}).catch(function(){});
+ if(window.caches)caches.keys().then(function(ks){ks.forEach(function(k){if(k.indexOf('beaconvale-')===0)caches.delete(k)})}).catch(function(){});
+})();
+</script>
+</body>
+</html>
